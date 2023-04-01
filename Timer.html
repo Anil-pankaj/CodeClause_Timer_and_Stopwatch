@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lovers Quarrel|Handlee|Indie Flower|Permanent Marker|Modak|Luckiest Guy|Ultra|Sigmar One">
+        <title>Timer made by Anil Pankaj</title>
+        <style>
+            
+body {
+    font-family:"Luckiest Guy";
+    background:black;
+    text-align:center;
+}
+.tu {
+    color:RED;
+    font-size:50px;
+    margin-bottom:50px;
+    display:none;
+}
+table {
+    margin-bottom:80px;
+}
+.stop {
+    width:100%;
+    font-family:"Luckiest Guy";
+    height:60px;
+    border:none;
+    font-size:30px;
+    background:red;
+    color:white;
+    display:none;
+    margin-top:80px;
+}
+.reset{
+    margin-top:80px;
+    width:50%;
+    color:white;
+    background:;
+    margin:none;
+    float:left;
+    height:60px;
+    font-family:"Luckiest Guy";
+    border:none;
+    display:none;
+    font-size:30px;
+}
+.start {
+    margin-top:80px;
+    color:white;
+    width:100%;
+    font-family:"Luckiest Guy";
+    height:60px;
+    border:none;
+    font-size:30px;
+    background:green;
+    opacity:0.5;
+}
+.
+.in {
+    width:31%;
+    height:100px;
+    font-size:45px;
+    text-align:center;
+}
+span {
+    width:31%;
+}
+table {
+    border-collapse:collapse;
+    border:;
+}
+.ok{
+    border-radius:50%;
+    width:80px;
+    height:80px;
+    background:red;
+    border:none;
+    font-size:30px;
+    color:white;
+    display:none;
+    font-family:"Ultra";
+}
+h1 {
+    color:white;
+    font-size:45px;
+}
+td {
+    padding:5px;
+    border-spacing:0px;
+    text-align:center;
+    width:;
+    font-family:"Ultra";
+    border:4px double;
+    color:white;
+}
+.ud {
+    width:;
+    float:;
+    padding:3px;
+    border:none;
+    background:linear-gradient(lightblue,steelblue);
+}
+
+        </style>
+    </head>
+    <body>
+    <h1>TIMER:</h1>
+    <table align=center>
+        <tr>
+            <td>HOURS</td>
+            <td>MINUTES</td>
+            <td>SECONDS</td>
+        </tr>
+        <tr>
+            <td><span id="h1" style="font-size:40px" >00</span><br /><button id="h2u" class="ud" onclick="func(this)">⬆️</button> <button id="h2m" class="ud" onclick="func(this)">⬇️</button></td>
+            <td><span id="m1" style="font-size:40px">00</span><br /><button id="m2u" class="ud" onclick="func(this)">⬆️</button> <button id="m2m" class="ud" onclick="func(this)">⬇️</button></td>
+            <td><span id="s1" style="font-size:40px" >00</span><br /><button id="s2u" class="ud" onclick="func(this)">⬆️</button> <button id="s2m" class="ud" onclick="func(this)">⬇️</button></td>
+        </tr>
+    </table>
+    <div class="tu" id="tu">!!TIME UP!!</div><br /><br /><br /><br/>
+    <button disabled="true" id="start" class="start" onclick="start()">Start</button>
+    <button id="ok" class="ok" onclick="ohkay()">X</button>
+    <button id="stop" class="stop" onclick="stop()">Stop</button>
+    <button id="restart" class="reset" style="background:green" onclick="restart()">Restart</button>
+    <button id="reset" class="reset" style="background:grey" onclick="reset()">Reset</button>
+    </audio>
+    <script>
+        window.onload =function() {
+    alert("TIMER:\n\nMade By # Anil Coder\nDont't Keep Your Phone On Silent\n#KeepCoding")
+};
+var h=0, m=0, s=0;
+function func(x) {
+    var k=new String(x.id);
+
+    if(k.charAt(0) === "h") {
+        var hour = document.getElementById("h1");
+        if(k.charAt(2) == 'u') {
+        if(h == 99) {
+            h=0;
+            hour.innerHTML="00";
+        }
+        else if(hour.innerHTML < 9) {
+            h++;
+            hour.innerHTML="0"+h;
+        }
+        else {
+            h++;
+            hour.innerHTML=h;
+        }
+        }
+        else {
+            if(h == 0) {
+            h=99;
+            hour.innerHTML="99";
+        }
+        else if(hour.innerHTML < 11) {
+            h--;
+            hour.innerHTML="0"+h;
+        }
+        else {
+            h--;
+            hour.innerHTML=h;
+        }
+        }
+    }
+    else if(k.charAt(0) === "m") {
+        var min = document.getElementById("m1");
+        if(k.charAt(2) == 'u') {
+        if(m == 59) {
+            m=0;
+            min.innerHTML="00";
+        }
+        else if(min.innerHTML < 9) {
+            m++;
+            min.innerHTML="0"+m;
+        }
+        else {
+            m++;
+            min.innerHTML=m;
+        }
+        }
+        else {
+            if(m == 0) {
+            m=59;
+            min.innerHTML="59";
+        }
+        else if(min.innerHTML < 11) {
+            m--;
+            min.innerHTML="0"+m;
+        }
+        else {
+            m--;
+            min.innerHTML=m;
+        }
+        }
+    }
+    else {
+        var sec = document.getElementById("s1");
+        if(k.charAt(2) == 'u') {
+        if(s == 59) {
+            s=0;
+            sec.innerHTML="00";
+        }
+        else if(sec.innerHTML < 9) {
+            s++;
+            sec.innerHTML="0"+s;
+        }
+        else {
+            s++;
+            sec.innerHTML=s;
+        }
+        }
+        else {
+            if(s == 0) {
+            s=59;
+            sec.innerHTML="59";
+        }
+        else if(sec.innerHTML < 11) {
+            s--;
+            sec.innerHTML="0"+s;
+        }
+        else {
+            s--;
+            sec.innerHTML=s;
+        }
+        }
+    }
+    enable()
+}
+function enable() {
+    var hour = new String(document.getElementById("h1").innerHTML);
+    var min = new String(document.getElementById("m1").innerHTML);
+    var sec = new String(document.getElementById("s1").innerHTML);
+    if(hour != "00" || sec != "00" || min != "00") {
+        document.getElementById("start").disabled=false;
+        document.getElementById("start").style.opacity="1";
+        }
+        else {
+        document.getElementById("start").disabled=true; 
+        document.getElementById("start").style.opacity="0.5";
+        }
+}
+var t=0;
+function start() {
+    var titles = document.querySelectorAll('.ud');
+    for(var i=0; i<6; i++) { titles[i].style.opacity = "0";
+    titles[i].disabled=true;
+    }
+t=setInterval(timer,100)
+    document.getElementById("start").style.display="none";
+    document.getElementById("stop").style.display="inline-block";
+}
+function stop() {
+    document.getElementById("stop").style.display="none";
+    document.getElementById("reset").style.display="inline-block";
+    document.getElementById("restart").style.display="inline-block";
+    clearInterval(t);
+}
+function reset() {
+var titles=document.querySelectorAll('.ud');
+for(var i=0; i<6; i++) { titles[i].style.opacity = '1';
+titles[i].disabled=false;
+    }
+s=0;
+h=0;
+m=0;
+    document.getElementById("reset").style.display="none";
+    document.getElementById("restart").style.display="none";
+    document.getElementById("start").style.display="inline-block";
+    document.getElementById("start").disabled=true;
+    document.getElementById("start").style.opacity="0.5";
+    document.getElementById("h1").innerHTML="00";
+    document.getElementById("m1").innerHTML="00";
+    document.getElementById("s1").innerHTML="00";
+}
+
+function restart() {
+    t=setInterval(timer,100);
+    document.getElementById("reset").style.display="none";
+    document.getElementById("restart").style.display="none";
+    document.getElementById("stop").style.display="inline-block";
+}
+var t2;
+var fc=0;
+function timer() {
+    fc++;
+    var hour = document.getElementById("h1");
+    var min = document.getElementById("m1");
+    var sec = document.getElementById("s1");
+    if(fc === 10) {
+    fc=0;
+        if(s > 0) {
+            if(s <= 10)
+            sec.innerHTML="0"+--s;
+            else
+            sec.innerHTML=--s;
+        }
+        else if(s == 0 && h==0 && m==0) {
+        navigator.vibrate(1000)
+        document.getElementById("tu").style.display="inline-block";
+        t2 = setInterval(vib, 2000);
+        
+        clearInterval(t)
+        
+        
+        document.getElementById("stop").style.display="none";
+        document.getElementById("ok").style.display="inline-block";
+        }
+        else if(s==0 && m > 0) {
+            m--;
+            if(m < 10) {
+                s=59;
+                
+                sec.innerHTML="59";
+                min.innerHTML="0"+m;
+            }
+            else {
+                s=59;
+                sec.innerHTML="59";
+                min.innerHTML=m;
+            }
+        }
+        else if(s == 0 && m == 0 && h > 0) {
+            h--;
+            if(h < 10) {
+                hour.innerHTML="0"+h;
+                m=59;
+                s=59;
+                min.innerHTML="59";
+                sec.innerHTML="59";
+            }
+            else {
+                hour.innerHTML=h;
+                m=59;
+                s=59;
+                min.innerHTML="59";
+                sec.innerHTML="59";
+            }
+        }
+    }
+}
+function vib() {
+    navigator.vibrate(1000);
+}
+function ohkay() {
+    var titles= document.querySelectorAll(".ud");
+        for(var i=0; i<6; i++) {
+            titles[i].style.opacity = "1";
+            titles[i].disabled=false;
+        }
+    document.getElementById("start").style.display="inline-block";
+    
+   document.getElementById("start").style.opacity="0.5";
+   document.getElementById("start").disabled=true; document.getElementById("ok").style.display="none";
+    document.getElementById("tu").style.display="none";
+    clearInterval(t2)
+}
+
+    </script>
+    </body>
+</html>

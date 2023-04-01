@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Stopwatch made by Anil Pankaj</title>
+        <meta charset="UTF-8">
+        <style>
+            body{background-color: black;}
+.container{
+    position: absolute;
+    height: 200pt;
+    width: 200pt;
+    margin:auto;
+    display: flex;
+    top: 0;right: 0;bottom: 0;left: 0;
+    justify-content: center;align-items: center;
+}
+#c{
+    height: 160pt;
+    width: 160pt;
+    position: absolute;
+    border: 5px solid rgb(0, 255, 220);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 40px rgb(0, 255, 220);
+    animation: a 2s infinite;
+}
+@keyframes a{
+    50%{
+        box-shadow: 0 0 50px rgb(0, 255, 220);
+    }
+}
+.mark{
+    height: 5px;
+    width: 5px;
+    top: -5px;
+    position: absolute;
+    background-color: rgb(255, 92, 92);
+}
+#timer{
+    position: absolute;
+    color: rgb(0, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: 900;
+    text-shadow:
+    /* Outline */  
+    -1px 0 0 #b2e9ff,
+    1px 0 0 #b2e9ff,
+    0 1px 0 #b2e9ff,
+    0 -1px 0 #b2e9ff;
+    z-index: +1;
+}
+img{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+button{
+    position: absolute;
+    background-color: transparent;
+    z-index: +1;
+    outline: none;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(159, 252, 255);
+    font-weight: 700;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30%;
+    border: 0;
+}
+#pp{
+    left: 35%;
+}
+#lr{
+    border-radius: 0;
+    right: 35%;
+    width: 39px;
+}
+#lbox{
+    position: absolute;
+    color: rgb(188, 188, 255);
+    top: 60%;
+    font-family: courier;
+    height: 50px;
+    text-align: center;
+    width: 140px;
+    overflow: scroll;
+    overflow-x: hidden;
+    z-index: +1;
+}
+#c2{
+    position:absolute;
+    height:200px;
+    width:200px;
+    border-radius:50%;
+    background: -webkit-linear-gradient(rgb(87, 255, 157), rgb(180, 0, 255));
+    z-index:-1;
+    animation: b 2s infinite;
+}
+.c3{
+    position: absolute;
+    height: 193px;
+    width: 193px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+        </style>
+        
+    </head>
+    <body onload="show();">
+        <div class="container">
+            <div id="c">
+                <div class="mark"></div>
+            </div>
+            <div id="timer">00:00.00</div>
+            <button id="pp" onclick="start()"><img src="https://pbs.twimg.com/profile_images/1475283350/apple-touch-icon_400x400.png" id="ppp" alt="Play Pause Button" draggable="false"></button>
+            <button id="lr" onclick="lr()">Reset</button>
+            <div id="lbox">Laps</div>
+            <div id="c2"></div>
+            <div class="c3"></div>
+        </div>
+        <script>
+            alert("Made by #Shivam Coder\nMight be laggy in a few devices...");
+var flag=0,rt=0,ss,mss;
+var    clsStopwatch = function() {
+        var    startAt    = 0;    
+        var    lapTime    = 0;   
+        var    now    = function() {
+                return (new Date()).getTime(); 
+            }; 
+        this.start = function() {
+                startAt    = startAt ? startAt : now();
+            };
+        this.stop = function() {
+                lapTime    = startAt ? lapTime + now() - startAt : lapTime;
+                startAt    = 0; 
+            };
+        this.reset = function() {
+                lapTime = startAt = 0;
+            };
+        this.time = function() {
+                return lapTime + (startAt ? now() - startAt : 0); 
+            };
+    };
+var x = new clsStopwatch();
+var timer = document.getElementById('timer');
+var clocktimer;
+
+function pad(num, size) {
+    var s = "0000" + num;
+    return s.substr(s.length - size);
+}
+
+function formatTime(time) {
+    var h = m = s = ms = mss = ss = 0;
+    var newTime = '';
+
+    h = Math.floor( time / (60 * 60 * 1000) );
+    time = time % (60 * 60 * 1000);
+    m = Math.floor( time / (60 * 1000) );
+    time = time % (60 * 1000);
+    s = Math.floor( time / 1000 );
+    ms = time % 1000;
+    ss = s;mss = ms;
+    newTime = pad(m, 2) + ':' + pad(s, 2) + '.' + pad(ms, 3);
+    return newTime;
+}
+
+function show() {
+    timer = document.getElementById('timer');
+    update();
+}
+
+function update() {
+    timer.innerHTML = formatTime(x.time());
+}
+
+function start() {
+    flag++;
+    if(flag%2!=0){
+        clocktimer = setInterval("update()", 1);
+        x.start();}
+    else{
+        x.stop();
+        clearInterval(clocktimer);}
+}
+var lc=0;
+function lr() {
+    if(flag%2!=0){
+    lc++;
+    document.getElementById('lbox').innerHTML=lc+' '+timer.innerHTML+"<br>"+document.getElementById('lbox').innerHTML;}
+    else{
+    lc=0;
+    stop();
+    x.reset();
+    update();
+    document.getElementById('lbox').innerHTML='Laps';
+    }
+}
+
+        </script>
+    </body>
+</html>
